@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="app">
-<header><div><span class="eyebrow">CONTROLE DE PONTUAÇÃO</span><h1>Pontinho</h1></div><span class="version">v1.9</span></header>
+<header><div><span class="eyebrow">CONTROLE DE PONTUAÇÃO</span><h1>Pontinho</h1></div><span class="version">v2.1</span></header>
 <section class="card">
   <div class="card-head"><b>Última partida</b></div>
   <div id="lastGame" class="empty">Nenhuma partida em andamento.</div>
@@ -21,11 +21,11 @@
 <div class="actions"><button id="newGameBtn" class="primary large">Nova partida</button><button id="mesaBtn" class="secondary large">📺 Modo Mesa</button>
 <div class="two"><button id="historyBtn" class="secondary">Histórico</button><button id="settingsBtn" class="secondary">Configurações</button></div></div>
 <section id="panel" class="card hidden"></section>
-<footer>Pontinho • protótipo v1.9</footer>
+<footer>Pontinho • protótipo v2.1</footer>
 </div><script src="app.js"></script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"));}</script>
 
-<!-- Modo Mesa v1.9 -->
+<!-- Modo Mesa v2.1 -->
 <style>
 #modo-mesa-v19{position:fixed;inset:0;background:#0b0f14;color:#fff;z-index:99999;display:none;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 #modo-mesa-v19.ativo{display:flex;flex-direction:column}
@@ -39,6 +39,16 @@
 #modo-mesa-v19 .mm-primary{background:#16a34a}
 #modo-mesa-v19 .mm-empty{grid-column:1/-1;text-align:center;color:#9ca3af;font-size:20px}
 @media(max-width:650px){#modo-mesa-v19 .mm-board{grid-template-columns:1fr;gap:10px;padding:10px}.mm-player{padding:14px!important}.mm-score{font-size:clamp(48px,18vw,82px)!important}}
+
+#modo-mesa-v19 .mm-player{transition:transform .15s,background .15s,border-color .15s}
+#modo-mesa-v19 .mm-player.mm-leading{background:#052e16;border-color:#16a34a;box-shadow:0 0 0 2px #16a34a33}
+#modo-mesa-v19 .mm-player.mm-losing{background:#450a0a;border-color:#ef4444;box-shadow:0 0 0 2px #ef444433}
+#modo-mesa-v19 .mm-player.mm-attention{background:#422006;border-color:#f59e0b;box-shadow:0 0 0 2px #f59e0b33}
+#modo-mesa-v19 .mm-player.mm-eliminated{background:#2b1111;border-color:#7f1d1d;opacity:.82}
+#modo-mesa-v19 .mm-tag{display:inline-block;margin-top:10px;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.04em}
+#modo-mesa-v19 .mm-tag.good{background:#166534;color:#bbf7d0}
+#modo-mesa-v19 .mm-tag.danger{background:#991b1b;color:#fecaca}
+#modo-mesa-v19 .mm-tag.attention{background:#b45309;color:#fef3c7}
 </style>
 <div id="modo-mesa-v19" aria-hidden="true">
   <div class="mm-top"><span>PONTINHO — MODO MESA</span><span id="mm-status">● Tela ativa</span></div>
@@ -49,8 +59,7 @@
 (function(){
  const overlay=document.getElementById('modo-mesa-v19'), board=document.getElementById('mm-board'); let wakeLock=null;
  function game(){try{return JSON.parse(localStorage.getItem('pontinhoGame')||'null')}catch(e){return null}}
- function render(){const g=game(); if(!g||!g.players||!g.players.length){board.innerHTML='<div class="mm-empty">Nenhuma partida em andamento.<br>Volte ao menu e crie uma partida.</div>';return}
- board.innerHTML=g.players.map(p=>'<div class="mm-player"><div class="mm-name">'+esc(p.name)+'</div><div class="mm-score">'+(p.score||0)+'</div></div>').join('')}
+ function render(){const g=game(); if(!g||!g.players||!g.players.length){board.innerHTML='<div class="mm-empty">Nenhuma partida em andamento.<br>Volte ao menu e crie uma partida.</div>';return} const scores=g.players.map(p=>Number(p.score)||0); const active=g.players.filter(p=>!p.eliminated); const min=active.length?Math.min(...active.map(p=>Number(p.score)||0)):0; const max=active.length?Math.max(...active.map(p=>Number(p.score)||0)):0; const limit=Number(g.limit)||21; board.innerHTML=g.players.map(p=>{const score=Number(p.score)||0; const near=!p.eliminated&&score>=limit*0.8; const leader=!p.eliminated&&score===min&&min<max; const losing=!p.eliminated&&score===max&&max>min; let cls='mm-player'; let tag=''; if(p.eliminated){cls+=' mm-eliminated';tag='<span class="mm-tag danger">ESTOUROU</span>'} else if(near){cls+=' mm-attention';tag='<span class="mm-tag attention">⚠️ PERTO DO LIMITE</span>'} else if(leader){cls+=' mm-leading';tag='<span class="mm-tag good">LIDERANDO</span>'} else if(losing){cls+=' mm-losing';tag='<span class="mm-tag danger">MAIOR PONTUAÇÃO</span>'} return '<div class="'+cls+'"><div class="mm-name">'+esc(p.name)+'</div><div class="mm-score">'+score+'</div>'+tag+'</div>'}).join('')}
  function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
  async function lock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');document.getElementById('mm-status').textContent='● Tela ativa'}}catch(e){document.getElementById('mm-status').textContent='● Tela ativa (navegador pode não suportar)'}}
  function open(){render();overlay.classList.add('ativo');overlay.setAttribute('aria-hidden','false');lock()}
