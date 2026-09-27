@@ -1,0 +1,4 @@
+Pontinho v2.2 — Compra + correção de cache
+- Mantém a nomenclatura "Compra".
+- Mantém a correção FIX4 do botão no iPhone.
+- Service Worker com versão de cache nova para forçar a atualização da aplicação instalada.
