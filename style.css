@@ -6,40 +6,6 @@
 
 .rebuy-box{margin:14px 0;padding:16px;border-radius:16px;background:#0f172a;border:1px solid #16a34a}.rebuy-box h3{margin:0 0 6px}.rebuy-box .muted{margin-bottom:12px}.toggle-line{display:flex;align-items:center;justify-content:space-between;padding:12px 0}.toggle-line input{width:auto;margin:0}
 
-/* v1.8: modo mesa reservado para a próxima grande etapa */
-
-
-/* Pontinho v1.9 — Modo Mesa: harmoniza os novos botões com a identidade visual existente */
-#modo-mesa-v19 .mm-actions button {
-  appearance: none;
-  border: 1px solid rgba(255,255,255,.14);
-  border-radius: 10px;
-  padding: 11px 16px;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform .12s ease, filter .12s ease;
-}
-#modo-mesa-v19 .mm-actions button:hover {
-  filter: brightness(1.08);
-}
-#modo-mesa-v19 .mm-actions button:active {
-  transform: scale(.97);
-}
-#modo-mesa-v19 #mm-new {
-  background: var(--primary, #2f6fed);
-  color: var(--primary-contrast, #fff);
-}
-#modo-mesa-v19 #mm-wake {
-  background: var(--secondary, #6b7280);
-  color: var(--secondary-contrast, #fff);
-}
-#modo-mesa-v19 #mm-exit {
-  background: var(--danger, #c0392b);
-  color: #fff;
-}
-
-
 /* Pontinho v2.0 — Mobile */
 @media (max-width: 700px) {
   html, body {
@@ -67,35 +33,6 @@
   input, select {
     min-height: 46px;
   }
-
-  #modo-mesa-v19 .mm-top {
-    padding: max(12px, env(safe-area-inset-top)) 12px 10px;
-  }
-
-  #modo-mesa-v19 .mm-board {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    padding: 10px !important;
-    overflow-y: auto;
-  }
-
-  #modo-mesa-v19 .mm-player {
-    padding: 12px !important;
-  }
-
-  #modo-mesa-v19 .mm-score {
-    font-size: clamp(44px, 18vw, 82px) !important;
-  }
-
-  #modo-mesa-v19 .mm-actions {
-    padding: 8px 10px max(12px, env(safe-area-inset-bottom)) !important;
-    gap: 8px;
-  }
-
-  #modo-mesa-v19 .mm-actions button {
-    flex: 1 1 30%;
-    min-height: 48px;
-  }
 }
 
 /* Prevent double-tap zoom on interactive controls */
@@ -103,3 +40,39 @@ button, a, input, select, textarea {
   touch-action: manipulation;
 }
 
+
+/* Pontinho v2.2 — menu discreto */
+header{position:relative}
+.menu-btn{width:44px;height:44px;min-width:44px;padding:0;margin:0;background:#1f2937;border:1px solid #374151;border-radius:50%;font-size:28px;line-height:1;color:#e5e7eb;display:flex;align-items:center;justify-content:center}
+.menu-btn:active{transform:scale(.96)}
+.menu{position:absolute;right:0;top:54px;width:230px;background:#111827;border:1px solid #374151;border-radius:16px;padding:7px;box-shadow:0 18px 40px #0008;z-index:50}
+.menu button{width:100%;text-align:left;background:transparent;border:0;border-radius:11px;padding:13px 14px;color:#f3f4f6;font-size:15px;font-weight:750;min-height:44px}
+.menu button:hover{background:#1f2937}
+.menu .menu-danger{color:#fca5a5}
+@media(max-width:650px){.menu{right:0;top:50px;width:215px}}
+
+/* v2.2 teste — ações iniciais na mesma linha */
+.home-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.continue-btn{background:#2563eb}
+.home-actions button{margin:0}
+@media(max-width:650px){.home-actions{grid-template-columns:1fr 1fr;gap:10px}.home-actions button{padding-left:10px;padding-right:10px;font-size:14px}}
+
+
+/* Pontinho v2.2 — ajuste final de cores e destaque */
+.home-actions .primary {
+  background: #2563eb;
+}
+.home-actions .continue-btn {
+  background: #f59e0b;
+}
+
+/* Nova rodada ocupa toda a largura do card */
+.panel-title {
+  flex-wrap: wrap;
+}
+.panel-title > #newRound {
+  flex: 0 0 100%;
+  width: 100%;
+  margin-top: 14px;
+  background: #16a34a;
+}

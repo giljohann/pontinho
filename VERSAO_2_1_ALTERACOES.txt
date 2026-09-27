@@ -1,6 +1,9 @@
-Pontinho v2.1
+PONTINHO v2.2
 
-- Remove o nome da partida.
-- Limite padrão: 21 pontos; máximo: 100.
-- Corrige a criação de novos campos de jogador para não repetir nome/autopreenchimento.
-- Modo Mesa: verde para menor pontuação (liderando), vermelho para maior pontuação, amarelo para quem está a 80% ou mais do limite, e destaque para estourado.
+Base: v2.1 aprovada.
+- Removido Modo Mesa.
+- Interface principal simplificada.
+- Menu discreto no canto superior direito.
+- Menu contém Nova partida, Histórico, Configurações e Encerrar partida.
+- Nova partida também permanece disponível na tela inicial para acesso rápido.
+- Service worker atualizado para v2.2.

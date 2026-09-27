@@ -9,71 +9,39 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Pontinho">
+
+<style>
+.app-brand-icon{
+  width:58px;
+  height:58px;
+  object-fit:cover;
+  border-radius:14px;
+  vertical-align:-17px;
+  margin-right:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,.30);
+}
+</style>
+
 </head>
 <body>
 <div class="app">
-<header><div><span class="eyebrow">CONTROLE DE PONTUAÇÃO</span><h1>Pontinho</h1></div><span class="version">v2.1</span></header>
+<header><div><span class="eyebrow">CONTROLE DE PONTUAÇÃO</span><h1><img class="app-brand-icon" src="icon-192.png" alt="" aria-hidden="true"> Pontinho</h1></div><button id="menuBtn" class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">⋮</button><div id="menu" class="menu hidden" role="menu">
+  <button id="menuNew" type="button">＋ Nova partida</button>
+  <button id="menuHistory" type="button">☷ Histórico</button>
+  <button id="menuSettings" type="button">⚙ Configurações</button>
+  <button id="menuEnd" class="menu-danger hidden" type="button">⏻ Encerrar partida</button>
+</div></header>
 <section class="card">
   <div class="card-head"><b>Última partida</b></div>
   <div id="lastGame" class="empty">Nenhuma partida em andamento.</div>
-  <button id="continueBtn" class="primary hidden">Continuar partida</button>
+  <div class="home-actions">
+    <button id="newGameBtn" class="primary large">Nova partida</button>
+    <button id="continueBtn" class="continue-btn large hidden">Continuar partida</button>
+  </div>
 </section>
-<div class="actions"><button id="newGameBtn" class="primary large">Nova partida</button><button id="mesaBtn" class="secondary large">📺 Modo Mesa</button>
-<div class="two"><button id="historyBtn" class="secondary">Histórico</button><button id="settingsBtn" class="secondary">Configurações</button></div></div>
 <section id="panel" class="card hidden"></section>
-<footer>Pontinho • protótipo v2.1</footer>
+<footer>Pontinho • v2.2</footer>
 </div><script src="app.js"></script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"));}</script>
 
-<!-- Modo Mesa v2.1 -->
-<style>
-#modo-mesa-v19{position:fixed;inset:0;background:#0b0f14;color:#fff;z-index:99999;display:none;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-#modo-mesa-v19.ativo{display:flex;flex-direction:column}
-#modo-mesa-v19 .mm-top{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #26303d;font-weight:800}
-#modo-mesa-v19 .mm-board{flex:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:18px;align-items:center;overflow:auto}
-#modo-mesa-v19 .mm-player{border:1px solid #374151;border-radius:20px;padding:22px;text-align:center;background:#111827}
-#modo-mesa-v19 .mm-name{font-size:clamp(18px,3vw,34px);font-weight:800;overflow-wrap:anywhere}
-#modo-mesa-v19 .mm-score{font-size:clamp(52px,10vw,110px);font-weight:900;line-height:1.05;margin-top:8px}
-#modo-mesa-v19 .mm-actions{display:flex;gap:10px;justify-content:center;padding:14px 18px 20px;flex-wrap:wrap;border-top:1px solid #26303d}
-#modo-mesa-v19 button{font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:#1f2937;color:#fff}
-#modo-mesa-v19 .mm-primary{background:#16a34a}
-#modo-mesa-v19 .mm-empty{grid-column:1/-1;text-align:center;color:#9ca3af;font-size:20px}
-@media(max-width:650px){#modo-mesa-v19 .mm-board{grid-template-columns:1fr;gap:10px;padding:10px}.mm-player{padding:14px!important}.mm-score{font-size:clamp(48px,18vw,82px)!important}}
-
-#modo-mesa-v19 .mm-player{transition:transform .15s,background .15s,border-color .15s}
-#modo-mesa-v19 .mm-player.mm-leading{background:#052e16;border-color:#16a34a;box-shadow:0 0 0 2px #16a34a33}
-#modo-mesa-v19 .mm-player.mm-losing{background:#450a0a;border-color:#ef4444;box-shadow:0 0 0 2px #ef444433}
-#modo-mesa-v19 .mm-player.mm-attention{background:#422006;border-color:#f59e0b;box-shadow:0 0 0 2px #f59e0b33}
-#modo-mesa-v19 .mm-player.mm-eliminated{background:#2b1111;border-color:#7f1d1d;opacity:.82}
-#modo-mesa-v19 .mm-tag{display:inline-block;margin-top:10px;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.04em}
-#modo-mesa-v19 .mm-tag.good{background:#166534;color:#bbf7d0}
-#modo-mesa-v19 .mm-tag.danger{background:#991b1b;color:#fecaca}
-#modo-mesa-v19 .mm-tag.attention{background:#b45309;color:#fef3c7}
-</style>
-<div id="modo-mesa-v19" aria-hidden="true">
-  <div class="mm-top"><span>PONTINHO — MODO MESA</span><span id="mm-status">● Tela ativa</span></div>
-  <div id="mm-board" class="mm-board"></div>
-  <div class="mm-actions"><button id="mm-new" class="mm-primary">Nova rodada</button><button id="mm-wake">Manter tela ligada</button><button id="mm-exit">Sair do Modo Mesa</button></div>
-</div>
-<script>
-(function(){
- const overlay=document.getElementById('modo-mesa-v19'), board=document.getElementById('mm-board'); let wakeLock=null;
- function game(){try{return JSON.parse(localStorage.getItem('pontinhoGame')||'null')}catch(e){return null}}
- function render(){const g=game(); if(!g||!g.players||!g.players.length){board.innerHTML='<div class="mm-empty">Nenhuma partida em andamento.<br>Volte ao menu e crie uma partida.</div>';return} const scores=g.players.map(p=>Number(p.score)||0); const active=g.players.filter(p=>!p.eliminated); const min=active.length?Math.min(...active.map(p=>Number(p.score)||0)):0; const max=active.length?Math.max(...active.map(p=>Number(p.score)||0)):0; const limit=Number(g.limit)||21; board.innerHTML=g.players.map(p=>{const score=Number(p.score)||0; const near=!p.eliminated&&score>=limit*0.8; const leader=!p.eliminated&&score===min&&min<max; const losing=!p.eliminated&&score===max&&max>min; let cls='mm-player'; let tag=''; if(p.eliminated){cls+=' mm-eliminated';tag='<span class="mm-tag danger">ESTOUROU</span>'} else if(near){cls+=' mm-attention';tag='<span class="mm-tag attention">⚠️ PERTO DO LIMITE</span>'} else if(leader){cls+=' mm-leading';tag='<span class="mm-tag good">LIDERANDO</span>'} else if(losing){cls+=' mm-losing';tag='<span class="mm-tag danger">MAIOR PONTUAÇÃO</span>'} return '<div class="'+cls+'"><div class="mm-name">'+esc(p.name)+'</div><div class="mm-score">'+score+'</div>'+tag+'</div>'}).join('')}
- function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
- async function lock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');document.getElementById('mm-status').textContent='● Tela ativa'}}catch(e){document.getElementById('mm-status').textContent='● Tela ativa (navegador pode não suportar)'}}
- function open(){render();overlay.classList.add('ativo');overlay.setAttribute('aria-hidden','false');lock()}
- function close(){overlay.classList.remove('ativo');overlay.setAttribute('aria-hidden','true');if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null}}
- document.getElementById('mesaBtn').onclick=open;
- document.getElementById('mm-exit').onclick=close;
- document.getElementById('mm-wake').onclick=lock;
- document.getElementById('mm-new').onclick=function(){if(typeof showRound==='function'){close();showRound(null)}else{alert('Abra uma partida primeiro.')}};
- window.pontinhoModoMesaV19={open,close,render};
- window.addEventListener('storage',render);
- document.addEventListener('visibilitychange',()=>{if(!document.hidden&&overlay.classList.contains('ativo'))lock()});
- window.addEventListener('pontinho:updated',render);
-})();
-</script>
-
-<div id="pontinho-v20-mobile-badge" style="display:none">Pontinho v2.0 Mobile</div>
 </body></html>
