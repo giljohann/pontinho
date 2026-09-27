@@ -1,0 +1,5 @@
+Pontinho v2.2 — Compra FIX4
+Correção estrutural para iPhone:
+- Jogadores que estouraram continuam com nome + pontuação na primeira linha.
+- O botão Comprar passa para uma segunda linha própria, dentro do cartão.
+- Não depende de uma terceira coluna estreita.

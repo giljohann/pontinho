@@ -1,3 +1,3 @@
-Pontinho v2.2 — Recompra FIX3
-Layout mobile com 3 colunas explícitas: jogador | pontuação | Recomprar.
+Pontinho v2.2 — Compra FIX3
+Layout mobile com 3 colunas explícitas: jogador | pontuação | Comprar.
 O botão não pode ocupar espaço fora da coluna nem empurrar o cartão para a direita.
