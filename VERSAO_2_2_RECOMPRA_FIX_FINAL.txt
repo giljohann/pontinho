@@ -1,0 +1,2 @@
+Correção final do botão Recomprar no mobile.
+O botão agora fica na coluna direita, abaixo da pontuação, dentro do cartão.
