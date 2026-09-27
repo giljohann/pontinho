@@ -1,4 +1,0 @@
-Pontinho v2.2 — alteração de nomenclatura
-- "Recomprar" passou a ser "Compra".
-- "Recompra" passou a ser "Compra" em configurações, mensagens e histórico.
-- Mantida a correção FIX4 do layout no iPhone.
