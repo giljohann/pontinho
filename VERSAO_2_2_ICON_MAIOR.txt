@@ -1,4 +1,0 @@
-Pontinho v2.2 — ícone maior no cabeçalho
-- Ícone do Pontinho aumentado para 58x58 px no cabeçalho.
-- Ícone do PWA para tela inicial permanece nos tamanhos próprios.
-- Demais funções mantidas.
