@@ -1,0 +1,9 @@
+Pontinho v2.2 — teste de interface
+
+Alterações deste teste:
+- Nova partida e Continuar partida ficam na mesma linha.
+- Nova partida permanece verde.
+- Continuar partida usa uma cor diferente (azul).
+- Nova rodada permanece em verde e em destaque.
+- Não há botões +/− individuais para os jogadores.
+- O fluxo de Nova rodada continua registrando quem bateu.

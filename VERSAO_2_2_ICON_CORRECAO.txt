@@ -1,0 +1,5 @@
+Pontinho v2.2 — ícone + correção do cursor
+- Corrigido foco inicial de Nova partida para o primeiro campo de jogador.
+- Novo ícone P + coringa + cartas usado no PWA.
+- Ícone também aparece ao lado do nome Pontinho no cabeçalho.
+- Mantidas as cores: Nova partida azul, Continuar partida laranja, Nova rodada verde.

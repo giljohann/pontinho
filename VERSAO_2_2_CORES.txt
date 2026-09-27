@@ -1,0 +1,6 @@
+Pontinho v2.2 — ajuste de cores
+- Nova partida: azul
+- Continuar partida: laranja
+- Nova rodada: verde, ocupando toda a largura do card
+- Mantido o fluxo de marcar quem bateu
+- Mantidos os demais recursos da v2.2

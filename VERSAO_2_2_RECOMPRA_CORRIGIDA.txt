@@ -1,0 +1,4 @@
+Pontinho v2.2 — correção do botão Comprar
+- Corrigido o layout mobile do botão Comprar.
+- O botão agora fica dentro da coluna do jogador e não ultrapassa a tela.
+- Mantidas as demais funções e o ícone.

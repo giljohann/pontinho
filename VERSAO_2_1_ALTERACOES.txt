@@ -1,0 +1,9 @@
+PONTINHO v2.2
+
+Base: v2.1 aprovada.
+- Removido Modo Mesa.
+- Interface principal simplificada.
+- Menu discreto no canto superior direito.
+- Menu contém Nova partida, Histórico, Configurações e Encerrar partida.
+- Nova partida também permanece disponível na tela inicial para acesso rápido.
+- Service worker atualizado para v2.2.
